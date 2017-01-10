@@ -64,6 +64,8 @@ public class CurrencySyncService extends IntentService {
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage());
 			}
+		} else {
+			Log.d(TAG, "Error downloading xml from url: " + BuildConfig.WEB_SERVICE_URL);
 		}
 	}
 

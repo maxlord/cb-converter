@@ -40,6 +40,7 @@ public class HttpUrlConnectionHttpClient implements IHttpClient {
 			url = new URL(fullLink);
 
 			urlConnection = (HttpURLConnection) url.openConnection();
+			urlConnection.setConnectTimeout(10 * 1000);
 
 			InputStream in = urlConnection.getInputStream();
 
