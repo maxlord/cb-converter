@@ -18,7 +18,7 @@ public class ConverterPresenter implements Presenter {
 	private ConverterDataView view;
 	private ConverterUseCase converterUseCase;
 
-	public ConverterPresenter(ConverterUseCase useCase) {
+	public ConverterPresenter(@NonNull ConverterUseCase useCase) {
 		this.converterUseCase = useCase;
 	}
 

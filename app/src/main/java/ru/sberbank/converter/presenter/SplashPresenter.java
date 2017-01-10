@@ -15,7 +15,7 @@ public class SplashPresenter implements Presenter {
 	private SplashDataView viewSplash;
 	private GetValutesUseCase getValutesUseCase;
 
-	public SplashPresenter(GetValutesUseCase getValutesUseCase) {
+	public SplashPresenter(@NonNull GetValutesUseCase getValutesUseCase) {
 		this.getValutesUseCase = getValutesUseCase;
 	}
 
