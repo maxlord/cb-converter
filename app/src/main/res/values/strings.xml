@@ -1,0 +1,10 @@
+<resources>
+	<string name="app_name">Конвертер валют</string>
+	<string name="activity_converter_amount_hint">Сумма в исходной валюте</string>
+	<string name="activity_converter_current_currency_hint">Исходная валюта</string>
+	<string name="activity_converter_convert_currency_hint">Конечная валюта</string>
+	<string name="activity_converter_convert_button">Конвертировать</string>
+	<string name="activity_converter_title">Конвертер</string>
+	<string name="common_error">Ошибка</string>
+	<string name="common_ok">OK</string>
+</resources>
