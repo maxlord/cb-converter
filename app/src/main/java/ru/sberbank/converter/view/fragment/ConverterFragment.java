@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import ru.sberbank.converter.R;
 import ru.sberbank.converter.data.db.entity.Currency;
 import ru.sberbank.converter.data.interactor.ConverterUseCase;
@@ -123,7 +125,7 @@ public class ConverterFragment extends BaseFragment implements ConverterDataView
 	public void displayResult(double result) {
 		amountResult.setVisibility(View.VISIBLE);
 
-		amountResult.setText(String.valueOf(result));
+		amountResult.setText(String.format(Locale.getDefault(), "%.2f", result));
 	}
 
 	@Override

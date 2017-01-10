@@ -3,9 +3,20 @@
 	<!-- Base application theme. -->
 	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 		<!-- Customize your theme here. -->
-		<item name="colorPrimary">@color/colorPrimary</item>
-		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-		<item name="colorAccent">@color/colorAccent</item>
+		<item name="colorPrimary">@color/primary</item>
+		<item name="colorPrimaryDark">@color/primary_dark</item>
+		<item name="colorAccent">@color/accent</item>
+
+		<!-- android:buttonStyle for v21+ and buttonStyle for the rest -->
+		<item name="buttonStyle">@style/MyCustomButton</item>
+		<item name="android:buttonStyle">@style/MyCustomButton</item>
+		<item name="colorButtonNormal">@color/primary</item>
+	</style>
+
+	<style name="MyCustomButton" parent="Base.Widget.AppCompat.Button">
+		<item name="android:textColor">#ffffff</item>
+		<item name="android:textAppearance">?android:attr/textAppearanceMediumInverse</item>
+		<item name="android:textAllCaps">true</item>
 	</style>
 
 </resources>

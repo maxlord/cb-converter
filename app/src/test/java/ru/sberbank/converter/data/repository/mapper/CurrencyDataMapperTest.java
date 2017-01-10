@@ -33,10 +33,10 @@ public class CurrencyDataMapperTest {
 		cv.put(Currency.COLUMN_NAME, currency.name);
 		cv.put(Currency.COLUMN_VALUE, currency.value);
 
-		CurrencyDataMapper mockCDM = Mockito.mock(CurrencyDataMapper.class);
+//		CurrencyDataMapper mockCDM = Mockito.mock(CurrencyDataMapper.class);
 		ContentValues mockCV = Mockito.mock(ContentValues.class);
 
-		when(mockCDM.transform(currency)).thenReturn(cv);
+//		when(mockCDM.transform(currency)).thenReturn(cv);
 		when(mockCV.size()).thenReturn(6);
 
 		assertEquals("Количество элементов не соответствует объекту", 6, mockCV.size());

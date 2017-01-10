@@ -20,7 +20,7 @@ public class BaseActvity extends AppCompatActivity {
 	 */
 	protected void addFragment(int containerViewId, Fragment fragment) {
 		final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
-		fragmentTransaction.add(containerViewId, fragment);
+		fragmentTransaction.replace(containerViewId, fragment);
 		fragmentTransaction.commit();
 	}
 }
