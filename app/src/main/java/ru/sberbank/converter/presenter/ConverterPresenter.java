@@ -16,10 +16,10 @@ import ru.sberbank.converter.view.ConverterDataView;
  */
 public class ConverterPresenter implements Presenter {
 	private ConverterDataView view;
-	private ConverterUseCase converterUseCase;
+	private ConverterUseCase interactor;
 
 	public ConverterPresenter(@NonNull ConverterUseCase useCase) {
-		this.converterUseCase = useCase;
+		this.interactor = useCase;
 	}
 
 	public void setView(@NonNull ConverterDataView view) {
@@ -31,7 +31,7 @@ public class ConverterPresenter implements Presenter {
 	 */
 	public void performConvert() {
 		try {
-			view.displayResult(converterUseCase.performConvert(view.getFromCurrency(), view.getToCurrency(), view.getAmount()));
+			view.displayResult(interactor.performConvert(view.getFromCurrency(), view.getToCurrency(), view.getAmount()));
 		} catch (Exception e) {
 			view.displayError(e.getMessage());
 		}
@@ -57,6 +57,6 @@ public class ConverterPresenter implements Presenter {
 	 * @return
 	 */
 	public List<Currency> getCurrencyItems() {
-		return converterUseCase.getCurrencies();
+		return interactor.getCurrencies();
 	}
 }

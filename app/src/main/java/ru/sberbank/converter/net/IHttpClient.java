@@ -14,7 +14,7 @@ public interface IHttpClient {
 	 *
 	 * @param url УРЛ для загрузки
 	 * @param args GET-параметры УРЛа
-	 * @return
+	 * @return контент страницы
 	 */
 	String get(String url, Map<String, Object> args);
 }

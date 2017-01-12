@@ -14,18 +14,17 @@ import ru.sberbank.converter.data.db.entity.Currency;
  * @since 23.12.16
  */
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
+
 	private static final String DATABASE_NAME = "main.db";
 	public static final String CURRENCY_TABLE = "currency";
 	private static final String CURRENCY_TABLE_DDL = "CREATE TABLE currency (" +
 			Currency.COLUMN_ID + " VARCHAR(10) PRIMARY KEY, " +
-			Currency.COLUMN_NAME + " VARCHAR(3) NOT NULL, " +
+			Currency.COLUMN_NUM_CODE + " VARCHAR(3) NOT NULL, " +
 			Currency.COLUMN_CHAR_CODE + " VARCHAR(3) NOT NULL, " +
 			Currency.COLUMN_NOMINAL + " INTEGER NOT NULL, " +
 			Currency.COLUMN_NAME + " VARCHAR(255) NOT NULL, " +
 			Currency.COLUMN_VALUE + " REAL NOT NULL" +
 			")";
-
-	private Context context;
 
 	public DatabaseOpenHelper(Context context) {
 		super(context, DATABASE_NAME, null, BuildConfig.DB_VERSION);
@@ -40,4 +39,5 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
 	}
+
 }

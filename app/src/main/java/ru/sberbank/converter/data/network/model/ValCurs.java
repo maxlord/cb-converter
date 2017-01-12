@@ -14,6 +14,7 @@ import java.util.List;
  */
 @Root(name = "ValCurs")
 public class ValCurs {
+
 	@Attribute(name = "Date")
 	public String date;
 
@@ -22,4 +23,5 @@ public class ValCurs {
 
 	@ElementList(inline = true, name = "Currency")
 	public List<Valute> valutes;
+
 }

@@ -10,7 +10,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import ru.sberbank.converter.R;
-import ru.sberbank.converter.data.interactor.GetValutesUseCase;
+import ru.sberbank.converter.data.db.DatabaseOpenHelper;
+import ru.sberbank.converter.data.interactor.FetchCurrenciesUseCase;
 import ru.sberbank.converter.data.repository.CurrencyDataRepository;
 import ru.sberbank.converter.presenter.SplashPresenter;
 import ru.sberbank.converter.view.SplashDataView;
@@ -63,14 +64,14 @@ public class Splash extends AppCompatActivity implements SplashDataView {
 
 		initializeViews();
 
-		GetValutesUseCase getValutesUseCase = new GetValutesUseCase(new CurrencyDataRepository(context()), new GetValutesUseCase.SyncCompletedListener() {
+		FetchCurrenciesUseCase fetchCurrenciesUseCase = new FetchCurrenciesUseCase(new CurrencyDataRepository(context(), new DatabaseOpenHelper(context())), new FetchCurrenciesUseCase.SyncCompletedListener() {
 			@Override
 			public void onComplete() {
 				hideLoading();
 				navigateConverterActivity();
 			}
 		});
-		presenter = new SplashPresenter(getValutesUseCase);
+		presenter = new SplashPresenter(fetchCurrenciesUseCase);
 		presenter.setView(this);
 		presenter.startSyncService();
 	}

@@ -19,12 +19,13 @@ import ru.sberbank.converter.data.service.CurrencySyncService;
  * @author Lord (Kuleshov M.V.)
  * @since 29.12.16
  */
-public class GetValutesUseCase extends UseCase<List<Currency>> {
+public class FetchCurrenciesUseCase {
+
 	public interface SyncCompletedListener {
 		void onComplete();
 	}
 
-	private final ICurrencyRepository valuteRepository;
+	private final ICurrencyRepository currencyRepository;
 
 	private CurrencySyncBroadcastReceiver receiver;
 	private IntentFilter intentFilter;
@@ -50,8 +51,8 @@ public class GetValutesUseCase extends UseCase<List<Currency>> {
 		}
 	}
 
-	public GetValutesUseCase(ICurrencyRepository valuteRepository, SyncCompletedListener completedListener) {
-		this.valuteRepository = valuteRepository;
+	public FetchCurrenciesUseCase(ICurrencyRepository currencyRepository, SyncCompletedListener completedListener) {
+		this.currencyRepository = currencyRepository;
 		this.completedListener = completedListener;
 
 		intentFilter = new IntentFilter(CurrencySyncService.BROADCAST_ACTION);
@@ -61,19 +62,19 @@ public class GetValutesUseCase extends UseCase<List<Currency>> {
 	/**
 	 * Получает список валют из БД.
 	 * Вызывается после синхронизации списка валют из сети.
-	 * @return
+	 * @return список валют
 	 */
-	@Override
-	protected List<Currency> fetchData() {
-		return valuteRepository.getList();
+	protected List<Currency> fetchCurrencies() {
+		return currencyRepository.getList();
 	}
 
 	/**
 	 * Стартует сервис для загрузки списка валют из сети
-	 * @param context
+	 * @param context контекст
 	 */
 	public void startService(Context context) {
 		Intent serviceIntent = new Intent(context, CurrencySyncService.class);
 		context.startService(serviceIntent);
 	}
+
 }

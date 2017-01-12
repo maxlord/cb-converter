@@ -2,7 +2,7 @@ package ru.sberbank.converter.presenter;
 
 import android.support.annotation.NonNull;
 
-import ru.sberbank.converter.data.interactor.GetValutesUseCase;
+import ru.sberbank.converter.data.interactor.FetchCurrenciesUseCase;
 import ru.sberbank.converter.view.SplashDataView;
 
 /**
@@ -13,10 +13,10 @@ import ru.sberbank.converter.view.SplashDataView;
  */
 public class SplashPresenter implements Presenter {
 	private SplashDataView viewSplash;
-	private GetValutesUseCase getValutesUseCase;
+	private FetchCurrenciesUseCase interactor;
 
-	public SplashPresenter(@NonNull GetValutesUseCase getValutesUseCase) {
-		this.getValutesUseCase = getValutesUseCase;
+	public SplashPresenter(@NonNull FetchCurrenciesUseCase interactor) {
+		this.interactor = interactor;
 	}
 
 	public void setView(@NonNull SplashDataView view) {
@@ -25,17 +25,17 @@ public class SplashPresenter implements Presenter {
 
 	public void startSyncService() {
 		viewSplash.showLoading();
-		getValutesUseCase.startService(viewSplash.context());
+		interactor.startService(viewSplash.context());
 	}
 
 	@Override
 	public void resume() {
-		getValutesUseCase.resume(viewSplash.context());
+		interactor.resume(viewSplash.context());
 	}
 
 	@Override
 	public void pause() {
-		getValutesUseCase.pause(viewSplash.context());
+		interactor.pause(viewSplash.context());
 	}
 
 	@Override

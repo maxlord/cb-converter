@@ -11,6 +11,7 @@ import ru.sberbank.converter.data.db.entity.Currency;
  * @since 05.01.17
  */
 public class CurrencyDataMapper {
+
 	public ContentValues transform(Currency item) {
 		ContentValues cv = new ContentValues();
 		cv.put(Currency.COLUMN_ID, item.id);
@@ -22,4 +23,5 @@ public class CurrencyDataMapper {
 
 		return cv;
 	}
+
 }

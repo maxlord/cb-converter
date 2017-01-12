@@ -27,9 +27,9 @@ public class CurrencyDataRepository implements ICurrencyRepository {
 	private DatabaseOpenHelper helper;
 //	private SQLiteDatabase db;
 
-	public CurrencyDataRepository(Context context) {
+	public CurrencyDataRepository(Context context, DatabaseOpenHelper helper) {
 		this.context = context;
-		this.helper = new DatabaseOpenHelper(context);
+		this.helper = helper;
 	}
 
 	private SQLiteDatabase getDatabase() {

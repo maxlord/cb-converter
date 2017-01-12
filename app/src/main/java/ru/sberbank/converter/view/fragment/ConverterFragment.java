@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import ru.sberbank.converter.R;
+import ru.sberbank.converter.data.db.DatabaseOpenHelper;
 import ru.sberbank.converter.data.db.entity.Currency;
 import ru.sberbank.converter.data.interactor.ConverterUseCase;
 import ru.sberbank.converter.data.repository.CurrencyDataRepository;
@@ -55,7 +56,7 @@ public class ConverterFragment extends BaseFragment implements ConverterDataView
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		presenter = new ConverterPresenter(new ConverterUseCase(new CurrencyDataRepository(context())));
+		presenter = new ConverterPresenter(new ConverterUseCase(new CurrencyDataRepository(context(), new DatabaseOpenHelper(context()))));
 		presenter.setView(this);
 	}
 

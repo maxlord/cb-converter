@@ -13,20 +13,17 @@ import ru.sberbank.converter.data.repository.ICurrencyRepository;
  * @author Lord (Kuleshov M.V.)
  * @since 10.01.17
  */
-public class ConverterUseCase extends UseCase<Double> {
-	private Currency fromCurrency;
-	private Currency toCurrency;
-	private Double fromValue;
+public class ConverterUseCase {
 
 	private final ICurrencyRepository currencyRepository;
 
-	public ConverterUseCase(ICurrencyRepository currencyRepository) {
+	public ConverterUseCase(@NonNull ICurrencyRepository currencyRepository) {
 		this.currencyRepository = currencyRepository;
 	}
 
 	/**
 	 * Получает список валют из БД
-	 * @return
+	 * @return список валют
 	 */
 	public List<Currency> getCurrencies() {
 		return currencyRepository.getList();
@@ -39,33 +36,18 @@ public class ConverterUseCase extends UseCase<Double> {
 	 * @param toCurrency конечная валюта
 	 * @param value значение
 	 *
-	 * @return
+	 * @return сконвертированное значение валюты
 	 */
 	public double performConvert(@NonNull Currency fromCurrency, @NonNull Currency toCurrency, double value) {
-		this.fromCurrency = fromCurrency;
-		this.toCurrency = toCurrency;
-		this.fromValue = value;
-
-		execute();
-
-		return getData();
-	}
-
-	/**
-	 * Выполняет основное действие класса: расчет конвертированного значения валюты
-	 *
-	 * @return
-	 */
-	@Override
-	protected Double fetchData() {
 		// Количество рублей в 1 единице валюты
 		double fromRur = fromCurrency.value / fromCurrency.nominal;
 		// исходное значение в рублях
-		double fromValueInRur = fromValue * fromRur;
+		double fromValueInRur = value * fromRur;
 
 		// конечное значение в конечной валюте
 		double toCurrencyInRur = toCurrency.value / toCurrency.nominal;
 
 		return fromValueInRur / toCurrencyInRur;
 	}
+
 }

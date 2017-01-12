@@ -12,6 +12,7 @@ import org.simpleframework.xml.Root;
  */
 @Root(name = "Valute")
 public class Valute {
+
 	@Attribute(name = "ID")
 	public String id;
 
@@ -29,4 +30,5 @@ public class Valute {
 
 	@Element(name="Value")
 	public String value;
+
 }

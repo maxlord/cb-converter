@@ -9,6 +9,7 @@ import android.app.Application;
  * @since 22.12.16
  */
 public class ConverterApplication extends Application {
+
 	private static ConverterApplication instance;
 
 	@Override
@@ -21,4 +22,5 @@ public class ConverterApplication extends Application {
 	public static ConverterApplication getInstance() {
 		return instance;
 	}
+
 }

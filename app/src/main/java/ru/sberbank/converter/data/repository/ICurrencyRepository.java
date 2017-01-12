@@ -13,14 +13,14 @@ import ru.sberbank.converter.data.db.entity.Currency;
 public interface ICurrencyRepository {
 	/**
 	 * Получает список валют
-	 * @return
+	 * @return список валют
 	 */
 	List<Currency> getList();
 
 	/**
 	 * Выполняет поиск валюты по коду
 	 * @param charCode код валюты, например: USD
-	 * @return
+	 * @return объект валюты
 	 */
 	Currency getByCharCode(String charCode);
 
