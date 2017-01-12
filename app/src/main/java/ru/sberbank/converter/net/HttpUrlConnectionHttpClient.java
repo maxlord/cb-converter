@@ -119,4 +119,5 @@ public class HttpUrlConnectionHttpClient implements IHttpClient {
 
 		return result.toString();
 	}
+
 }

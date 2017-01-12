@@ -15,6 +15,7 @@ import ru.sberbank.converter.view.ConverterDataView;
  * @since 10.01.17
  */
 public class ConverterPresenter implements Presenter {
+
 	private ConverterDataView view;
 	private ConverterUseCase interactor;
 
@@ -59,4 +60,5 @@ public class ConverterPresenter implements Presenter {
 	public List<Currency> getCurrencyItems() {
 		return interactor.getCurrencies();
 	}
+
 }

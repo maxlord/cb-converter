@@ -13,6 +13,7 @@ import ru.sberbank.converter.view.fragment.ConverterFragment;
  * @since 22.12.16
  */
 public class Converter extends BaseActvity {
+
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,4 +22,5 @@ public class Converter extends BaseActvity {
 
 		addFragment(R.id.container, ConverterFragment.newInstance());
 	}
+
 }

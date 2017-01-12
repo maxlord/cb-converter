@@ -64,7 +64,7 @@ public class Splash extends AppCompatActivity implements SplashDataView {
 
 		initializeViews();
 
-		FetchCurrenciesUseCase fetchCurrenciesUseCase = new FetchCurrenciesUseCase(new CurrencyDataRepository(context(), new DatabaseOpenHelper(context())), new FetchCurrenciesUseCase.SyncCompletedListener() {
+		FetchCurrenciesUseCase fetchCurrenciesUseCase = new FetchCurrenciesUseCase(new CurrencyDataRepository(new DatabaseOpenHelper(context())), new FetchCurrenciesUseCase.SyncCompletedListener() {
 			@Override
 			public void onComplete() {
 				hideLoading();
@@ -100,4 +100,5 @@ public class Splash extends AppCompatActivity implements SplashDataView {
 
 		presenter.destroy();
 	}
+
 }

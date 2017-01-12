@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
  * @since 22.12.16
  */
 public class BaseActvity extends AppCompatActivity {
+
 	/**
 	 * Добавляет {@link Fragment} к разметке активити.
 	 *
@@ -23,4 +24,5 @@ public class BaseActvity extends AppCompatActivity {
 		fragmentTransaction.replace(containerViewId, fragment);
 		fragmentTransaction.commit();
 	}
+
 }

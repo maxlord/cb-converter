@@ -9,6 +9,7 @@ import java.util.Map;
  * @since 26.12.16
  */
 public interface IHttpClient {
+
 	/**
 	 * Получает содержимое веб-страницы по URL-у
 	 *
@@ -17,4 +18,5 @@ public interface IHttpClient {
 	 * @return контент страницы
 	 */
 	String get(String url, Map<String, Object> args);
+
 }

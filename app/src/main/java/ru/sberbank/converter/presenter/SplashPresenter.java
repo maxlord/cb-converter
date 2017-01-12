@@ -12,6 +12,7 @@ import ru.sberbank.converter.view.SplashDataView;
  * @since 22.12.16
  */
 public class SplashPresenter implements Presenter {
+
 	private SplashDataView viewSplash;
 	private FetchCurrenciesUseCase interactor;
 
@@ -42,4 +43,5 @@ public class SplashPresenter implements Presenter {
 	public void destroy() {
 
 	}
+
 }

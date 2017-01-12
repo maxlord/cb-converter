@@ -56,7 +56,7 @@ public class ConverterFragment extends BaseFragment implements ConverterDataView
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		presenter = new ConverterPresenter(new ConverterUseCase(new CurrencyDataRepository(context(), new DatabaseOpenHelper(context()))));
+		presenter = new ConverterPresenter(new ConverterUseCase(new CurrencyDataRepository(new DatabaseOpenHelper(context()))));
 		presenter.setView(this);
 	}
 
@@ -142,4 +142,5 @@ public class ConverterFragment extends BaseFragment implements ConverterDataView
 	public Context context() {
 		return getActivity();
 	}
+
 }

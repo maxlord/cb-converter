@@ -7,21 +7,23 @@ package ru.sberbank.converter.presenter;
  * @since 22.12.16
  */
 public interface Presenter {
+
 	/**
-	 * Method that control the lifecycle of the view. It should be called in the view's
-	 * (Activity or Fragment) onResume() method.
+	 * Метод для контроля жизненного цикла вью.
+	 * Должен вызываться, в методе onResume() (Activity или Fragment)
 	 */
 	void resume();
 
 	/**
-	 * Method that control the lifecycle of the view. It should be called in the view's
-	 * (Activity or Fragment) onPause() method.
+	 * Метод для контроля жизненного цикла вью.
+	 * Должен вызываться, в методе onPause() (Activity или Fragment)
 	 */
 	void pause();
 
 	/**
-	 * Method that control the lifecycle of the view. It should be called in the view's
-	 * (Activity or Fragment) onDestroy() method.
+	 * Метод для контроля жизненного цикла вью.
+	 * Должен вызываться, в методе onDestroy() (Activity или Fragment)
 	 */
 	void destroy();
+
 }

@@ -39,7 +39,7 @@ public class CurrencySyncService extends IntentService {
 
 	private void updateCurrencies() {
 		IHttpClient client = new HttpUrlConnectionHttpClient();
-		ICurrencyRepository repository = new CurrencyDataRepository(getBaseContext(), new DatabaseOpenHelper(getBaseContext()));
+		ICurrencyRepository repository = new CurrencyDataRepository(new DatabaseOpenHelper(getBaseContext()));
 
 		String xml = client.get(BuildConfig.WEB_SERVICE_URL, null);
 		if (!TextUtils.isEmpty(xml)) {

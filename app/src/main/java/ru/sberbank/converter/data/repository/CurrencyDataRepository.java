@@ -1,7 +1,6 @@
 package ru.sberbank.converter.data.repository;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,14 +20,12 @@ import ru.sberbank.converter.data.repository.mapper.CurrencyDataMapper;
  * @since 29.12.16
  */
 public class CurrencyDataRepository implements ICurrencyRepository {
+
 	private static final String TAG = "CurrencyDataRepository";
 
-	private Context context;
 	private DatabaseOpenHelper helper;
-//	private SQLiteDatabase db;
 
-	public CurrencyDataRepository(Context context, DatabaseOpenHelper helper) {
-		this.context = context;
+	public CurrencyDataRepository(DatabaseOpenHelper helper) {
 		this.helper = helper;
 	}
 

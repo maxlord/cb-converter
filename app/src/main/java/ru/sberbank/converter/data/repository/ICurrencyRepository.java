@@ -11,6 +11,7 @@ import ru.sberbank.converter.data.db.entity.Currency;
  * @since 29.12.16
  */
 public interface ICurrencyRepository {
+
 	/**
 	 * Получает список валют
 	 * @return список валют
@@ -35,4 +36,5 @@ public interface ICurrencyRepository {
 	 * @param currencies список валют
 	 */
 	void storeList(List<Currency> currencies);
+
 }

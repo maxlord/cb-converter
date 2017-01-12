@@ -12,6 +12,7 @@ import ru.sberbank.converter.data.db.entity.Currency;
  * @since 26.12.16
  */
 public interface ConverterDataView {
+
 	/**
 	 * Выполнить конвертирование
 	 */
@@ -52,4 +53,5 @@ public interface ConverterDataView {
 	 * @return
 	 */
 	Context context();
+
 }

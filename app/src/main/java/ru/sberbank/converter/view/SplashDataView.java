@@ -9,6 +9,7 @@ import android.content.Context;
  * @since 26.12.16
  */
 public interface SplashDataView {
+
 	void showLoading();
 
 	void hideLoading();
@@ -18,4 +19,5 @@ public interface SplashDataView {
 	void showError(String message);
 
 	Context context();
+
 }
