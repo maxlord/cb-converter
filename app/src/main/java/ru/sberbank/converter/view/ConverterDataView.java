@@ -1,9 +1,6 @@
 package ru.sberbank.converter.view;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-
-import ru.sberbank.converter.data.db.entity.Currency;
 
 /**
  * Вью для экрана "Конвертер"
@@ -17,24 +14,6 @@ public interface ConverterDataView {
 	 * Выполнить конвертирование
 	 */
 	void performConvert();
-
-	/**
-	 * Получает выбранную исходную валюту
-	 * @return
-	 */
-	@NonNull Currency getFromCurrency();
-
-	/**
-	 * Получает выбранную конечную валюту
-	 * @return
-	 */
-	@NonNull Currency getToCurrency();
-
-	/**
-	 * Получает введенное значение валюты
-	 * @return
-	 */
-	double getAmount();
 
 	/**
 	 * Отображает результат пользователю

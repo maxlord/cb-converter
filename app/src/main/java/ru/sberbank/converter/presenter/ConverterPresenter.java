@@ -30,9 +30,9 @@ public class ConverterPresenter implements Presenter {
 	/**
 	 * Выполняет конвертирование значения
 	 */
-	public void performConvert() {
+	public void performConvert(@NonNull Currency fromCurrency, @NonNull Currency toCurrency, double value) {
 		try {
-			view.displayResult(interactor.performConvert(view.getFromCurrency(), view.getToCurrency(), view.getAmount()));
+			view.displayResult(interactor.performConvert(fromCurrency, toCurrency, value));
 		} catch (Exception e) {
 			view.displayError(e.getMessage());
 		}

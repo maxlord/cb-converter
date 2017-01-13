@@ -102,22 +102,19 @@ public class ConverterFragment extends BaseFragment implements ConverterDataView
 	@Override
 	public void performConvert() {
 		amountResult.setVisibility(View.GONE);
-		presenter.performConvert();
+		presenter.performConvert(getFromCurrency(), getToCurrency(), getAmount());
 	}
 
 	@NonNull
-	@Override
 	public Currency getFromCurrency() {
 		return (Currency) currentCurrency.getSelectedItem();
 	}
 
 	@NonNull
-	@Override
 	public Currency getToCurrency() {
 		return (Currency) convertCurrency.getSelectedItem();
 	}
 
-	@Override
 	public double getAmount() {
 		return Double.parseDouble(amount.getText().toString());
 	}
