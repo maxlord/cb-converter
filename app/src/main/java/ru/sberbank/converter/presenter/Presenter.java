@@ -10,6 +10,12 @@ public interface Presenter {
 
 	/**
 	 * Метод для контроля жизненного цикла вью.
+	 * Должен вызываться, в методе onStart() (Activity или Fragment)
+	 */
+	void start();
+
+	/**
+	 * Метод для контроля жизненного цикла вью.
 	 * Должен вызываться, в методе onResume() (Activity или Fragment)
 	 */
 	void resume();

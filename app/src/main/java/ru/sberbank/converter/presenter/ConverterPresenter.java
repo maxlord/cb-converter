@@ -5,7 +5,9 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import ru.sberbank.converter.data.db.entity.Currency;
+import ru.sberbank.converter.data.interactor.ConvertException;
 import ru.sberbank.converter.data.interactor.ConverterUseCase;
+import ru.sberbank.converter.util.Logger;
 import ru.sberbank.converter.view.ConverterDataView;
 
 /**
@@ -15,6 +17,8 @@ import ru.sberbank.converter.view.ConverterDataView;
  * @since 10.01.17
  */
 public class ConverterPresenter implements Presenter {
+	private static final String TAG = "ConverterPresenter";
+
 
 	private ConverterDataView view;
 	private ConverterUseCase interactor;
@@ -33,9 +37,16 @@ public class ConverterPresenter implements Presenter {
 	public void performConvert(@NonNull Currency fromCurrency, @NonNull Currency toCurrency, double value) {
 		try {
 			view.displayResult(interactor.performConvert(fromCurrency, toCurrency, value));
-		} catch (Exception e) {
+		} catch (ConvertException e) {
+			Logger.e(TAG, "Ошибка конвертирования валюты", e);
+
 			view.displayError(e.getMessage());
 		}
+	}
+
+	@Override
+	public void start() {
+
 	}
 
 	@Override
@@ -55,7 +66,7 @@ public class ConverterPresenter implements Presenter {
 
 	/**
 	 * Получает список валют
-	 * @return
+	 * @return список валют
 	 */
 	public List<Currency> getCurrencyItems() {
 		return interactor.getCurrencies();

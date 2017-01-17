@@ -7,4 +7,6 @@
 	<string name="activity_converter_title">Конвертер</string>
 	<string name="common_error">Ошибка</string>
 	<string name="common_ok">OK</string>
+	<string name="activity_splash_dialog_button_next">Продолжить</string>
+	<string name="activity_splash_dialog_button_exit">Выйти</string>
 </resources>

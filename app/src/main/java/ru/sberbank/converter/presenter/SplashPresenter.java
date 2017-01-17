@@ -26,22 +26,26 @@ public class SplashPresenter implements Presenter {
 
 	public void startSyncService() {
 		viewSplash.showLoading();
+	}
+
+	@Override
+	public void start() {
 		interactor.startService(viewSplash.context());
 	}
 
 	@Override
 	public void resume() {
-		interactor.resume(viewSplash.context());
+
 	}
 
 	@Override
 	public void pause() {
-		interactor.pause(viewSplash.context());
+
 	}
 
 	@Override
 	public void destroy() {
-
+		interactor.stopService(viewSplash.context());
 	}
 
 }

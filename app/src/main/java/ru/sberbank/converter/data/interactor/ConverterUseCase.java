@@ -38,7 +38,15 @@ public class ConverterUseCase {
 	 *
 	 * @return сконвертированное значение валюты
 	 */
-	public double performConvert(@NonNull Currency fromCurrency, @NonNull Currency toCurrency, double value) {
+	public double performConvert(@NonNull Currency fromCurrency, @NonNull Currency toCurrency, double value) throws ConvertException {
+		if (fromCurrency.id.equalsIgnoreCase(toCurrency.id)) {
+			throw new ConvertException("Бессмысленно конвертировать одноименные валюты");
+		} else if (fromCurrency.nominal <= 0) {
+			throw new ConvertException("Номинал исходной валюты должен быть >= 0");
+		} else if (toCurrency.nominal <= 0) {
+			throw new ConvertException("Номинал конечной валюты должен быть >= 0");
+		}
+
 		// Количество рублей в 1 единице валюты
 		double fromRur = fromCurrency.value / fromCurrency.nominal;
 		// исходное значение в рублях

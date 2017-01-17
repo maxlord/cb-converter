@@ -22,6 +22,7 @@ import ru.sberbank.converter.data.db.entity.Currency;
 import ru.sberbank.converter.data.interactor.ConverterUseCase;
 import ru.sberbank.converter.data.repository.CurrencyDataRepository;
 import ru.sberbank.converter.presenter.ConverterPresenter;
+import ru.sberbank.converter.util.Logger;
 import ru.sberbank.converter.view.ConverterDataView;
 import ru.sberbank.converter.view.ViewFinder;
 
@@ -32,6 +33,7 @@ import ru.sberbank.converter.view.ViewFinder;
  * @since 22.12.16
  */
 public class ConverterFragment extends BaseFragment implements ConverterDataView {
+	private static final String TAG = "ConverterFragment";
 
 	EditText amount;
 	Spinner currentCurrency;
@@ -40,8 +42,6 @@ public class ConverterFragment extends BaseFragment implements ConverterDataView
 	TextView amountResult;
 
 	private ConverterPresenter presenter;
-	private ArrayAdapter<Currency> fromCurrencyAdapter;
-	private ArrayAdapter<Currency> toCurrencyAdapter;
 
 	public static ConverterFragment newInstance() {
 		Bundle args = new Bundle();
@@ -90,11 +90,11 @@ public class ConverterFragment extends BaseFragment implements ConverterDataView
 	 * Инициализирует выпадающие списки
 	 */
 	private void initializeSpinners() {
-		fromCurrencyAdapter = new ArrayAdapter<>(context(), android.R.layout.simple_list_item_1,
+		ArrayAdapter<Currency> fromCurrencyAdapter = new ArrayAdapter<>(context(), android.R.layout.simple_list_item_1,
 				presenter.getCurrencyItems());
 		currentCurrency.setAdapter(fromCurrencyAdapter);
 
-		toCurrencyAdapter = new ArrayAdapter<>(context(), android.R.layout.simple_list_item_1,
+		ArrayAdapter<Currency> toCurrencyAdapter = new ArrayAdapter<>(context(), android.R.layout.simple_list_item_1,
 				presenter.getCurrencyItems());
 		convertCurrency.setAdapter(toCurrencyAdapter);
 	}
@@ -116,7 +116,13 @@ public class ConverterFragment extends BaseFragment implements ConverterDataView
 	}
 
 	public double getAmount() {
-		return Double.parseDouble(amount.getText().toString());
+		try {
+			return Double.parseDouble(amount.getText().toString());
+		} catch (NumberFormatException e) {
+			Logger.e(TAG, "Ошибка преобразования строки в число");
+		}
+
+		return 0;
 	}
 
 	@Override
@@ -140,4 +146,31 @@ public class ConverterFragment extends BaseFragment implements ConverterDataView
 		return getActivity();
 	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		presenter.start();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		presenter.resume();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+
+		presenter.pause();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		presenter.destroy();
+	}
 }

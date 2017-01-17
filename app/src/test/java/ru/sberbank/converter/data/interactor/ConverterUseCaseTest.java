@@ -47,4 +47,33 @@ public class ConverterUseCaseTest {
 
 		Assert.assertEquals(expected, result, .3);
 	}
+
+	@Test
+	public void performConvertNominalIsNull() throws Exception {
+		ConverterUseCase useCase = new ConverterUseCase(new CurrencyMockRepository());
+
+		Currency fromCurrency = new Currency();
+		fromCurrency.id = "R01235";
+		fromCurrency.numCode = "840";
+		fromCurrency.charCode = "USD";
+		fromCurrency.nominal = 0;
+		fromCurrency.name = "Доллар США";
+		fromCurrency.value = 60.9084;
+
+		Currency toCurrency = new Currency();
+		toCurrency.id = "R01239";
+		toCurrency.charCode = "EUR";
+		toCurrency.numCode = "978";
+		toCurrency.nominal = 0;
+		toCurrency.name = "Евро";
+		toCurrency.value = 63.7285;
+
+		double expected = 14.17;
+
+		double result = useCase.performConvert(fromCurrency, toCurrency, 15);
+
+		Assert.assertEquals("Необработано деление на 0", false, Double.isNaN(result));
+
+		Assert.assertEquals(expected, result, .3);
+	}
 }

@@ -1,9 +1,11 @@
 package ru.sberbank.converter.view.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -70,6 +72,28 @@ public class Splash extends AppCompatActivity implements SplashDataView {
 				hideLoading();
 				navigateConverterActivity();
 			}
+
+			@Override
+			public void error(String message) {
+				hideLoading();
+
+				new AlertDialog.Builder(context())
+						.setTitle(R.string.common_error)
+						.setMessage(message)
+						.setPositiveButton(R.string.activity_splash_dialog_button_next, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								navigateConverterActivity();
+							}
+						})
+						.setNegativeButton(R.string.activity_splash_dialog_button_exit, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								finish();
+							}
+						})
+						.show();
+			}
 		});
 		presenter = new SplashPresenter(fetchCurrenciesUseCase);
 		presenter.setView(this);
@@ -78,6 +102,13 @@ public class Splash extends AppCompatActivity implements SplashDataView {
 
 	private void initializeViews() {
 		progress = ViewFinder.findById(this, R.id.progress);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+
+		presenter.start();
 	}
 
 	@Override
@@ -99,6 +130,11 @@ public class Splash extends AppCompatActivity implements SplashDataView {
 		super.onDestroy();
 
 		presenter.destroy();
+	}
+
+	@Override
+	public void onBackPressed() {
+		// Запрещаем закрывать стартовый экран
 	}
 
 }

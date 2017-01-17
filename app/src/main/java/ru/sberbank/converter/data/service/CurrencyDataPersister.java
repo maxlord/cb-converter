@@ -1,9 +1,9 @@
 package ru.sberbank.converter.data.service;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +11,7 @@ import ru.sberbank.converter.data.db.entity.Currency;
 import ru.sberbank.converter.data.network.model.ValCurs;
 import ru.sberbank.converter.data.network.model.Valute;
 import ru.sberbank.converter.data.repository.ICurrencyRepository;
+import ru.sberbank.converter.util.Logger;
 
 /**
  * Занимается сохранением списка полученных валют с сайта
@@ -46,7 +47,7 @@ class CurrencyDataPersister {
 				currencies.add(currency);
 			}
 			// логируем
-			Log.d(TAG, "Валюты: " + currencies.toString());
+			Logger.d(TAG, "Валюты: " + currencies.toString());
 			currencyRepository.storeList(currencies);
 		}
 	}
@@ -64,8 +65,8 @@ class CurrencyDataPersister {
 			Number num = df.parse(s);
 
 			return num.doubleValue();
-		} catch (Exception e) {
-			Log.e(TAG, "Ошибка при конвертировании строки в вещественное число", e);
+		} catch (ParseException e) {
+			Logger.e(TAG, "Ошибка при конвертировании строки в вещественное число", e);
 		}
 
 		return defValue;

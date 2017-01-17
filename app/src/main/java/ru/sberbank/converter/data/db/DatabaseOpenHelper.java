@@ -25,6 +25,13 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 			Currency.COLUMN_NAME + " VARCHAR(255) NOT NULL, " +
 			Currency.COLUMN_VALUE + " REAL NOT NULL" +
 			")";
+	private static final String CURRENCY_RUB_INSERT = "INSERT INTO currency (" +
+			Currency.COLUMN_ID + ", " +
+			Currency.COLUMN_NUM_CODE + ", " +
+			Currency.COLUMN_CHAR_CODE + ", " +
+			Currency.COLUMN_NOMINAL + ", " +
+			Currency.COLUMN_NAME + ", " +
+			Currency.COLUMN_VALUE + ") VALUES ('R00000', '000', 'RUB', 1, 'Российский рубль', 1)";
 
 	public DatabaseOpenHelper(Context context) {
 		super(context, DATABASE_NAME, null, BuildConfig.DB_VERSION);
@@ -33,6 +40,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CURRENCY_TABLE_DDL);
+		// Вставляем информацию о российском рубле, потому что веб-сервис не содержит этой информации
+		db.execSQL(CURRENCY_RUB_INSERT);
 	}
 
 	@Override

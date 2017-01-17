@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.List;
 import ru.sberbank.converter.data.db.DatabaseOpenHelper;
 import ru.sberbank.converter.data.db.entity.Currency;
 import ru.sberbank.converter.data.repository.mapper.CurrencyDataMapper;
+import ru.sberbank.converter.util.Logger;
 
 /**
  * Репозиторий для управления данными о валютах в БД
@@ -35,7 +35,7 @@ public class CurrencyDataRepository implements ICurrencyRepository {
 
 	/**
 	 * Получает список валют
-	 * @return
+	 * @return список валют
 	 */
 	@Override
 	public List<Currency> getList() {
@@ -71,7 +71,7 @@ public class CurrencyDataRepository implements ICurrencyRepository {
 
 			return items;
 		} catch (SQLException e) {
-			Log.e(TAG, "Ошибка при получении списка валют из БД", e);
+			Logger.e(TAG, "Ошибка при получении списка валют из БД", e);
 		} finally {
 			if (c != null) {
 				c.close();
@@ -98,7 +98,7 @@ public class CurrencyDataRepository implements ICurrencyRepository {
 		try {
 			db.insertOrThrow(DatabaseOpenHelper.CURRENCY_TABLE, null, cv);
 		} catch (SQLException e) {
-			Log.e(TAG, "Ошибка при вставке нового элемента", e);
+			Logger.e(TAG, "Ошибка при вставке нового элемента", e);
 			// Возникла ошибка при вставке, значит делаем обновление
 			db.update(DatabaseOpenHelper.CURRENCY_TABLE, cv, Currency.COLUMN_ID + " = ?", new String[] { String.valueOf(item.id) });
 		}
@@ -128,18 +128,13 @@ public class CurrencyDataRepository implements ICurrencyRepository {
 		SQLiteDatabase db = getDatabase();
 
 		db.beginTransaction();
-		try {
-			if (currencies != null && !currencies.isEmpty()) {
-				for (Currency item : currencies) {
-					storeItemInDatabase(db, item);
-				}
+		if (currencies != null && !currencies.isEmpty()) {
+			for (Currency item : currencies) {
+				storeItemInDatabase(db, item);
 			}
-			db.setTransactionSuccessful();
-		} catch (Exception e) {
-			Log.e(TAG, "Ошибка при сохранении списка валют в БД");
-		} finally {
-			db.endTransaction();
-			db.close();
 		}
+		db.setTransactionSuccessful();
+		db.endTransaction();
+		db.close();
 	}
 }

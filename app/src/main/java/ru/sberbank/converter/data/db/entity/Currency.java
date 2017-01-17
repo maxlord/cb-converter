@@ -15,15 +15,38 @@ public class Currency {
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_VALUE = "value";
 
+	/**
+	 * Идентификатор валюты
+	 */
 	public String id;
+	/**
+	 * Номерной код
+	 */
 	public String numCode;
+	/**
+	 * Символьный код, например: USD
+	 */
 	public String charCode;
+	/**
+	 * Номинал валюты, например 10 шведских крон
+	 */
 	public int nominal;
+	/**
+	 * Наименование валюты, например: Российский рубль
+	 */
 	public String name;
+	/**
+	 * Значение курса
+	 */
 	public double value;
 
 	@Override
 	public String toString() {
-		return charCode + " (" + name + ")";
+		return charCode +
+				" (" +
+				nominal +
+				" " +
+				name +
+				")";
 	}
 }

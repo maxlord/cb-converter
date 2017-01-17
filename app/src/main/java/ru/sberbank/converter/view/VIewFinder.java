@@ -15,6 +15,9 @@ import android.view.View;
  * @since 22.12.16
  */
 public class ViewFinder {
+	private ViewFinder() {
+	}
+
 	/** Simpler version of {@link View#findViewById(int)} which infers the target type. */
 	@SuppressWarnings({ "unchecked", "UnusedDeclaration" }) // Checked by runtime cast. Public API.
 	@CheckResult

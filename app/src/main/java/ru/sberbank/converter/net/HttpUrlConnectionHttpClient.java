@@ -1,7 +1,5 @@
 package ru.sberbank.converter.net;
 
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
+
+import ru.sberbank.converter.util.Logger;
 
 /**
  * Http-клиент на основе HttpUrlConnection
@@ -38,7 +38,11 @@ public class HttpUrlConnectionHttpClient implements IHttpClient {
 	public String get(String link, Map<String, Object> args) {
 		String fullLink = link;
 		if (args != null && !args.isEmpty()) {
-			fullLink += URL_QUERY_SEPARATOR + getQuery(args);
+			try {
+				fullLink += URL_QUERY_SEPARATOR + getQuery(args);
+			} catch (UnsupportedEncodingException e) {
+				Logger.e(TAG, "Ошибка при кодированию URL-адреса", e);
+			}
 		}
 
 		HttpURLConnection urlConnection = null;
@@ -51,8 +55,8 @@ public class HttpUrlConnectionHttpClient implements IHttpClient {
 			InputStream in = urlConnection.getInputStream();
 
 			return readStream(in);
-		} catch (Exception e) {
-			Log.e(TAG, "Ошибка при получении содержимого документа через УРЛ: " + fullLink, e);
+		} catch (IOException e) {
+			Logger.e(TAG, "Ошибка при получении содержимого документа через УРЛ: " + fullLink, e);
 		} finally {
 			if (urlConnection != null) {
 				urlConnection.disconnect();
@@ -77,14 +81,16 @@ public class HttpUrlConnectionHttpClient implements IHttpClient {
 			while ((line = reader.readLine()) != null) {
 				response.append(line);
 			}
+		} catch (UnsupportedEncodingException e) {
+			Logger.e(TAG, "Ошибка преобразования кодировки текста", e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.e(TAG, "Ошибка чтения данных из потока", e);
 		} finally {
 			if (reader != null) {
 				try {
 					reader.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					Logger.e(TAG, "Ошибка при закрытии reader", e);
 				}
 			}
 		}
@@ -98,7 +104,7 @@ public class HttpUrlConnectionHttpClient implements IHttpClient {
 	 *
 	 * @return получает строку с параметрами запроса, типа: var1=a&var2=bc
 	 */
-	private String getQuery(Map<String, Object> params) {
+	private String getQuery(Map<String, Object> params) throws UnsupportedEncodingException {
 		StringBuilder result = new StringBuilder();
 		boolean first = true;
 
@@ -108,13 +114,9 @@ public class HttpUrlConnectionHttpClient implements IHttpClient {
 			else
 				result.append(URL_PARAM_CONCATENATOR);
 
-			try {
-				result.append(URLEncoder.encode(pair.getKey(), ENCODING_UTF8));
-				result.append(URL_PARAM_SEPARATOR);
-				result.append(URLEncoder.encode(String.valueOf(pair.getValue()), ENCODING_UTF8));
-			} catch (UnsupportedEncodingException e) {
-				Log.e(TAG, "Возникла ошибки при кодировании параметра URL");
-			}
+			result.append(URLEncoder.encode(pair.getKey(), ENCODING_UTF8));
+			result.append(URL_PARAM_SEPARATOR);
+			result.append(URLEncoder.encode(String.valueOf(pair.getValue()), ENCODING_UTF8));
 		}
 
 		return result.toString();
